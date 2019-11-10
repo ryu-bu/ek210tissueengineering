@@ -16,6 +16,14 @@ float aveTemp(float T1, float T2){
   return (T1+T2)/2;
 }
 
+float calcTemp(int Vo){
+  float R2 = R1 * (1023.0 / (float)Vo - 1.0);
+  float logR = log(R2);
+  float T = (1.0 / (c1 + c2*logR + c3*logR*logR*logR));
+  float Tc = T - 273.15;
+
+  return Tc;
+}
 
 void setup() {
   // put your setup code here, to run once:
@@ -29,14 +37,16 @@ void loop() {
   //temperature
   V1 = analogRead(ThermistorPin1);
   V2 = analogRead(ThermistorPin2);
-  R21 = R1 * (1023.0 / (float)V1 - 1.0);
+  /*R21 = R1 * (1023.0 / (float)V1 - 1.0);
   R22 = R1 * (1023.0 / (float)V2 - 1.0);
   logR21 = log(R21);
   logR22 = log(R22);
   T1 = (1.0 / (c1 + c2*logR21 + c3*logR21*logR21*logR21));
   T1 = T1 - 273.15;
   T2 = (1.0 / (c1 + c2*logR22 + c3*logR22*logR22*logR22));
-  T2 = T2 - 273.15;
+  T2 = T2 - 273.15;*/
+  T1 = calcTemp(V1);
+  T2 = calcTemp(V2);
   
 
   //display
