@@ -6,6 +6,7 @@ Adafruit_CharacterOLED lcd(OLED_V2, 6, 7, 8, 9, 10, 11, 12);
 
 int ThermistorPin1 = 0;
 int ThermistorPin2 = 1;
+int ThermistorPin3 = 2;
 int V1;
 int V2;
 float R1 = 100000;
@@ -25,6 +26,30 @@ float calcTemp(int Vo){
   return Tc;
 }
 
+/*float maxTemp(int T1, int T2, int T3){
+  float maxT = T1;
+  float maxArray[3] = {T1, T2, T3};
+  for (int i = 0; i < 3; i++){
+    if (maxArray[i] > maxT){
+      maxT = maxArray[i];
+    }
+  }
+  
+  return maxT;
+}
+
+float minTemp(int T1, int T2, int T3){
+  float minT = T1;
+  float minArray[3] = {T1, T2, T3};
+  for (int i = 0; i < 3; i++){
+    if (minArray[i] < minT){
+      maxT = maxArray[i];
+    }
+  }
+
+  return minT;
+}*/
+
 void setup() {
   // put your setup code here, to run once:
   lcd.begin(16, 2);
@@ -37,6 +62,8 @@ void loop() {
   //temperature
   V1 = analogRead(ThermistorPin1);
   V2 = analogRead(ThermistorPin2);
+  //V3 = analogRead(ThermistorPin3);
+  
   /*R21 = R1 * (1023.0 / (float)V1 - 1.0);
   R22 = R1 * (1023.0 / (float)V2 - 1.0);
   logR21 = log(R21);
@@ -45,8 +72,10 @@ void loop() {
   T1 = T1 - 273.15;
   T2 = (1.0 / (c1 + c2*logR22 + c3*logR22*logR22*logR22));
   T2 = T2 - 273.15;*/
+  
   T1 = calcTemp(V1);
   T2 = calcTemp(V2);
+  //T3 = calcTemp(V3);
   
 
   //display
@@ -64,6 +93,7 @@ void loop() {
 
   lcd.setCursor(0, 0);
   lcd.print("Max Temp: ");
+  //lcd.print(maxTemp);
   lcd.setCursor(0, 1);
   lcd.print("Temp2: ");
   lcd.print(T2);
@@ -72,9 +102,10 @@ void loop() {
 
   lcd.setCursor(0, 0);
   lcd.print("Min Temp: ");
+  //lcd.print(minTemp);
   lcd.setCursor(0, 1);
   lcd.print("Temp3: ");
-  //lcd.print("       ");
+  //lcd.print(T3);
   delay(1500);
   
 }
