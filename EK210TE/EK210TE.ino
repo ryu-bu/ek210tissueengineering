@@ -4,17 +4,17 @@ Adafruit_CharacterOLED lcd(OLED_V2, 6, 7, 8, 9, 10, 11, 12);
 
 //temperature 
 
-int ThermistorPin1 = 0;
-int ThermistorPin2 = 1;
-int ThermistorPin3 = 2;
-int V1;
-int V2;
-float R1 = 100000;
-float logR21,logR22, R21, R22, T1, T2;
+const int ThermistorPin1 = 0;
+const int ThermistorPin2 = 1;
+const int ThermistorPin3 = 2;
+const int ThermistorPin4 = 3;
+int V1, V2, V3, V4;
+const float R1 = 100000;
+float logR21,logR22, R21, R22, T1, T2, T3, T4;
 float c1 = 1.009249522e-03, c2 = 2.378405444e-04, c3 = 2.019202697e-07;
 
-float aveTemp(float T1, float T2){
-  return (T1+T2)/2;
+float aveTemp(float T1, float T2, float T3, float T4){
+  return (T1+T2+T3+T4)/4;
 }
 
 float calcTemp(int Vo){
@@ -26,10 +26,43 @@ float calcTemp(int Vo){
   return Tc;
 }
 
-/*float maxTemp(int T1, int T2, int T3){
+void printTemp(int n, float T){
+  lcd.setCursor(0, 1);
+  if (n == 1){
+    lcd.print("Temp1: ");
+  }
+  else if (n == 2){
+    lcd.print("Temp2: ");
+  }
+  else if (n == 3){
+    lcd.print("Temp3: ");
+  }
+  else {
+    lcd.print("Temp4: ");
+  }
+  lcd.print(T);
+  lcd.print("C");
+}
+
+void printStuff(int n, float val){
+  lcd.setCursor(0, 0);
+  if (n == 1){
+    lcd.print("Ave Temp: ");
+  }
+  else if (n == 2){
+    lcd.print("Max Temp: ");
+  }
+  else {
+    lcd.print("Min Temp: ");
+  }
+  lcd.print(val);
+  lcd.print("C");
+}
+
+float maxTemp(float T1, float T2, float T3, float T4){
   float maxT = T1;
-  float maxArray[3] = {T1, T2, T3};
-  for (int i = 0; i < 3; i++){
+  float maxArray[4] = {T1, T2, T3, T4};
+  for (int i = 0; i < 4; i++){
     if (maxArray[i] > maxT){
       maxT = maxArray[i];
     }
@@ -38,17 +71,17 @@ float calcTemp(int Vo){
   return maxT;
 }
 
-float minTemp(int T1, int T2, int T3){
+float minTemp(float T1, float T2, float T3, float T4){
   float minT = T1;
-  float minArray[3] = {T1, T2, T3};
-  for (int i = 0; i < 3; i++){
+  float minArray[4] = {T1, T2, T3, T4};
+  for (int i = 0; i < 4; i++){
     if (minArray[i] < minT){
-      maxT = maxArray[i];
+      minT = minArray[i];
     }
   }
 
   return minT;
-}*/
+}
 
 void setup() {
   // put your setup code here, to run once:
@@ -62,7 +95,8 @@ void loop() {
   //temperature
   V1 = analogRead(ThermistorPin1);
   V2 = analogRead(ThermistorPin2);
-  //V3 = analogRead(ThermistorPin3);
+  V3 = analogRead(ThermistorPin3);
+  V4 = analogRead(ThermistorPin4);
   
   /*R21 = R1 * (1023.0 / (float)V1 - 1.0);
   R22 = R1 * (1023.0 / (float)V2 - 1.0);
@@ -75,11 +109,11 @@ void loop() {
   
   T1 = calcTemp(V1);
   T2 = calcTemp(V2);
-  //T3 = calcTemp(V3);
-  
+  T3 = calcTemp(V3);
+  T4 = calcTemp(V4);
 
   //display
-  lcd.setCursor(0, 0);
+  /*lcd.setCursor(0, 0);
   //average
   lcd.print("Avg Temp: ");
   lcd.print(aveTemp(T1,T2));
@@ -88,24 +122,47 @@ void loop() {
   //temp1
   lcd.print("Temp1: ");
   lcd.print(T1);
-  lcd.print("C");
+  lcd.print("C");*/
+
+  printStuff(1, aveTemp(T1, T2, T3, T4));
+  printTemp(1, T1);
   delay(1500);
 
-  lcd.setCursor(0, 0);
-  lcd.print("Max Temp: ");
-  //lcd.print(maxTemp);
+  /*lcd.setCursor(0, 0);
+  lcd.print("Avg Temp: ");
+  lcd.print(aveTemp(T1, T2));
+  lcd.print("C");
   lcd.setCursor(0, 1);
+  //temp2
   lcd.print("Temp2: ");
   lcd.print(T2);
-  lcd.print("C");
+  lcd.print("C");*/
+
+  printStuff(1, aveTemp(T1, T2, T3, T4));
+  printTemp(2, T2);
   delay(1500);
 
-  lcd.setCursor(0, 0);
-  lcd.print("Min Temp: ");
-  //lcd.print(minTemp);
+  /*lcd.setCursor(0, 0);
+  lcd.print("Max Temp: ");
+  lcd.print(maxTemp(T1,T2,T3,T4));
   lcd.setCursor(0, 1);
   lcd.print("Temp3: ");
-  //lcd.print(T3);
+  lcd.print(T3);*/
+  
+  printStuff(2, maxTemp(T1,T2,T3,T4));
+  printTemp(3, T3);
   delay(1500);
+
+  /*lcd.setCursor(0, 0);
+  lcd.print("Min Temp: ");
+  lcd.print(minTemp(T1,T2,T3,T4));
+  lcd.setCursor(0, 1);
+  lcd.print("Temp4: ");
+  lcd.print(T4);*/
+
+  printStuff(3, minTemp(T1,T2,T3,T4));
+  printTemp(4, T4);
+  delay(1500);
+ 
   
 }
