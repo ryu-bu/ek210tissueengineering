@@ -1,0 +1,58 @@
+{
+    "configurations": [
+        {
+            "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
+        },
+        {
+            "name": "Mac",
+            "macFrameworkPath": [],
+            "includePath": [
+                "/Users/ryu1174/Desktop/ek210tissueengineering/EK210TE/display/include",
+                "/Users/ryu1174/Desktop/ek210tissueengineering/EK210TE/display/src",
+                "/Users/ryu1174/Desktop/ek210tissueengineering/EK210TE/display/lib/Adafruitdisplay",
+                "/Users/ryu1174/.platformio/packages/framework-arduinoavr/cores/arduino",
+                "/Users/ryu1174/.platformio/packages/framework-arduinoavr/variants/eightanaloginputs",
+                "/Users/ryu1174/.platformio/lib/Adafruit SSD1306_ID135",
+                "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/EEPROM/src",
+                "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/HID/src",
+                "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SPI/src",
+                "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SoftwareSerial/src",
+                "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/Wire/src",
+                "/Users/ryu1174/.platformio/packages/tool-unity",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/Users/ryu1174/Desktop/ek210tissueengineering/EK210TE/display/include",
+                    "/Users/ryu1174/Desktop/ek210tissueengineering/EK210TE/display/src",
+                    "/Users/ryu1174/Desktop/ek210tissueengineering/EK210TE/display/lib/Adafruitdisplay",
+                    "/Users/ryu1174/.platformio/packages/framework-arduinoavr/cores/arduino",
+                    "/Users/ryu1174/.platformio/packages/framework-arduinoavr/variants/eightanaloginputs",
+                    "/Users/ryu1174/.platformio/lib/Adafruit SSD1306_ID135",
+                    "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/EEPROM/src",
+                    "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/HID/src",
+                    "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SPI/src",
+                    "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/SoftwareSerial/src",
+                    "/Users/ryu1174/.platformio/packages/framework-arduinoavr/libraries/__cores__/arduino/Wire/src",
+                    "/Users/ryu1174/.platformio/packages/tool-unity",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=40100",
+                "ARDUINO_AVR_NANO",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10805",
+                "__AVR_ATmega328P__",
+                ""
+            ],
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "\"/Users/ryu1174/.platformio/packages/toolchain-atmelavr/bin/avr-gcc\" -mmcu=atmega328p"
+        }
+    ],
+    "version": 4
+}
